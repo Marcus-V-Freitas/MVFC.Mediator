@@ -1,0 +1,9 @@
+﻿global using BenchmarkDotNet.Running;
+global using MVFC.Mediator.Tests;
+global using BenchmarkDotNet.Attributes;
+global using FluentValidation;
+global using Microsoft.Extensions.DependencyInjection;
+global using MVFC.Mediator;
+global using MVFC.Mediator.Extensions;
+global using MVFC.Mediator.Tests.Models;
+global using MVFC.Mediator.Tests.Validator;
