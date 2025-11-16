@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Version>0.0.0</Version>
@@ -25,9 +25,16 @@
 		<None Include="icon.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.9.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.*" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.*" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="12.1.*" />
+	</ItemGroup>
+	
 </Project>
