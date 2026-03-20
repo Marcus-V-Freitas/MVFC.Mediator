@@ -1,6 +1,6 @@
 ﻿# MVFC.Mediator
 
-> 🇧🇷 [Leia em Português](README.pt-br.md)
+> 🇺🇸 [Read in English](README.md)
 
 [![CI](https://github.com/Marcus-V-Freitas/MVFC.Mediator/actions/workflows/ci.yml/badge.svg)](https://github.com/Marcus-V-Freitas/MVFC.Mediator/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/Marcus-V-Freitas/MVFC.Mediator/branch/main/graph/badge.svg)](https://codecov.io/gh/Marcus-V-Freitas/MVFC.Mediator)
@@ -8,74 +8,74 @@
 ![Platform](https://img.shields.io/badge/.NET-9%20%7C%2010-blue)
 ![NuGet Version](https://img.shields.io/nuget/v/MVFC.Mediator)
 
-A high-performance, zero-allocation dispatcher implementation of the Mediator pattern for .NET 9 and 10. Centralize your business logic, decouple components, and scale with confidence.
+Uma implementação de alto desempenho e alocação zero do padrão Mediator para .NET 9 e 10. Centralize sua lógica de negócio, desacople componentes e escale com confiança.
 
-## Motivation
+## Motivação
 
-In complex .NET applications, direct dependencies between services often lead to:
+Em aplicações .NET complexas, dependências diretas entre serviços geralmente levam a:
 
-- **Tight Coupling**: Difficult to test and maintain components.
-- **Boilerplate**: Repetitive logic for validation and orchestration.
-- **Poor Scalability**: Hard to evolve systems as they grow.
-- **Performance Overhead**: Common libraries often introduce hidden allocations and reflection costs.
+- **Acoplamento Forte**: Componentes difíceis de testar e manter.
+- **Boilerplate**: Lógica repetitiva para validação e orquestração.
+- **Baixa Escalabilidade**: Dificuldade em evoluir sistemas à medida que crescem.
+- **Sobrecarga de Desempenho**: Bibliotecas comuns costumam introduzir alocações ocultas e custos de reflexão (reflection).
 
-**MVFC.Mediator** solves this by providing a lightweight, ultra-fast mediator with a zero-allocation dispatcher pattern. It uses static generic caching and advanced IL techniques to ensure that your message routing is as fast as a direct method call.
+**MVFC.Mediator** resolve isso fornecendo um mediator leve e ultra-rápido com um padrão de dispatcher de alocação zero. Ele utiliza cache genérico estático e técnicas avançadas de IL para garantir que o roteamento de mensagens seja tão rápido quanto uma chamada de método direta.
 
-## Architecture
+## Arquitetura
 
-- **Zero-Allocation Dispatchers**: Uses `Volatile.Read` and `Interlocked` for thread-safe, reflection-free handler invocation.
-- **Fluent Integration**: Seamlessly connects with `Microsoft.Extensions.DependencyInjection`.
-- **Validation-First**: Built-in support for `FluentValidation` with parallel execution for multiple validators.
-- **Fan-out Support**: Native notification system for broadcasting events to multiple handlers.
+- **Dispatcher de Alocação Zero**: Utiliza `Volatile.Read` e `Interlocked` para invocação de handlers segura para threads e sem reflexão.
+- **Integração Fluida**: Conecta-se perfeitamente com `Microsoft.Extensions.DependencyInjection`.
+- **Validação Integrada**: Suporte nativo para `FluentValidation` com execução paralela para múltiplos validadores.
+- **Suporte a Fan-out**: Sistema de notificações nativo para transmitir eventos para múltiplos handlers.
 
 ---
 
-## Installation
+## Instalação
 
-Install the package via NuGet:
+Instale o pacote via NuGet:
 
 ```sh
 dotnet add package MVFC.Mediator
 ```
 
-## Quick Start
+## Início Rápido
 
-### 1. Register with Dependency Injection
+### 1. Registro com Injeção de Dependência
 
 ```csharp
 builder.Services.AddMediator();
 ```
 
-### 2. Basic Command (No Response)
+### 2. Comando Básico (Sem Resposta)
 
 ```csharp
-// Define the command
+// Defina o comando
 public record DeleteUserCommand(Guid UserId) : ICommand;
 
-// Implement the handler
+// Implemente o handler
 public class DeleteUserHandler : ICommandHandler<DeleteUserCommand>
 {
     public ValueTask Handle(DeleteUserCommand command, CancellationToken ct)
     {
-        // Logic to delete user
+        // Lógica para deletar o usuário
         return ValueTask.CompletedTask;
     }
 }
 
-// Usage
+// Uso
 await mediator.Send(new DeleteUserCommand(uid));
 ```
 
-### 3. Command with Response & Validation
+### 3. Comando com Resposta e Validação
 
 ```csharp
-// Response model
+// Modelo de resposta
 public record UserCreated(Guid Id);
 
-// Command with TResponse
+// Comando com TResponse
 public record CreateUser(string Name, string Email) : ICommand<UserCreated>;
 
-// Validator (executed automatically if registered)
+// Validador (executado automaticamente se registrado)
 public class CreateUserValidator : AbstractValidator<CreateUser>
 {
     public CreateUserValidator()
@@ -94,11 +94,11 @@ public class CreateUserHandler : ICommandHandler<CreateUser, UserCreated>
     }
 }
 
-// Usage
+// Uso
 var result = await mediator.Send<CreateUser, UserCreated>(new CreateUser("John", "john@test.com"));
 ```
 
-### 4. Query (Read Logic)
+### 4. Query (Lógica de Leitura)
 
 ```csharp
 public record GetUserQuery(Guid Id) : IQuery<UserDto>;
@@ -111,28 +111,28 @@ public class GetUserHandler : IQueryHandler<GetUserQuery, UserDto>
     }
 }
 
-// Usage
+// Uso
 var user = await mediator.Query<GetUserQuery, UserDto>(new GetUserQuery(uid));
 ```
 
-### 5. Notifications (Event Broadcasting)
+### 5. Notificações (Broadcasting de Eventos)
 
 ```csharp
 public record UserRegistered(Guid Id) : INotification;
 
-// Multiple handlers for the same notification
+// Múltiplos handlers para a mesma notificação
 public class LoggingHandler : INotificationHandler<UserRegistered> { ... }
 public class WelcomeEmailHandler : INotificationHandler<UserRegistered> { ... }
 
-// Usage (broadcasting to all handlers)
+// Uso (transmitindo para todos os handlers)
 await mediator.Publish(new UserRegistered(uid));
 ```
 
 ---
 
-## Performance
+## Desempenho
 
-Built for high-throughput scenarios, benchmarked on .NET 9.
+Construído para cenários de alto rendimento, benchmarked no .NET 9.
 
 ```text
 
@@ -147,44 +147,44 @@ IterationCount=5  WarmupCount=3
 ```
 | Method                                  | Mean      | Error     | StdDev    | Gen0   | Allocated |
 |---------------------------------------- |----------:|----------:|----------:|-------:|----------:|
-| 'Individual HTTP request simulation'    |  1.364 μs | 0.2325 μs | 0.0604 μs | 0.4272 |   3.97 KB |
-| 'Multiple parallel requests simulation' | 13.688 μs | 2.2724 μs | 0.3517 μs | 4.3335 |  40.15 KB |
+| 'Simula request HTTP individual'        |  1.364 μs | 0.2325 μs | 0.0604 μs | 0.4272 |   3.97 KB |
+| 'Simula múltiplos requests em paralelo' | 13.688 μs | 2.2724 μs | 0.3517 μs | 4.3335 |  40.15 KB |
 
 
-## API Reference
+## Referência da API
 
-| Interface | Method | Use Case |
+| Interface | Método | Caso de Uso |
 |---|---|---|
-| `ICommand` | `Send(command)` | Action without return (side effects). |
-| `ICommand<T>` | `Send<C, T>(command)` | Action with return. |
-| `IQuery<T>` | `Query<Q, T>(query)` | Data retrieval. |
-| `INotification` | `Publish(event)` | Broadcasting events (one-to-many). |
+| `ICommand` | `Send(command)` | Ação sem retorno (efeitos colaterais). |
+| `ICommand<T>` | `Send<C, T>(command)` | Ação com retorno. |
+| `IQuery<T>` | `Query<Q, T>(query)` | Recuperação de dados. |
+| `INotification` | `Publish(event)` | Transmissão de eventos (um para muitos). |
 
-## Project Structure
+## Estrutura do Projeto
 
 ```text
 src/
-  MVFC.Mediator/      # Core logic and Dispatchers
+  MVFC.Mediator/      # Lógica central e Dispatchers
 playground/
-  Playground.Api/     # Usage examples and Integration tests
+  Playground.Api/     # Exemplos de uso e testes de integração
 tests/
-  MVFC.Mediator.Tests # Unit and Architecture tests
+  MVFC.Mediator.Tests # Testes unitários e de arquitetura
 ```
 
 ---
 
-## Requirements
+## Requisitos
 
-- .NET 9 or .NET 10
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+- .NET 9 ou .NET 10
 
 ---
 
-## License
+## Contribuindo
+
+Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Licença
 
 [Apache-2.0](LICENSE)

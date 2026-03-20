@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/playground/">
+    <Project Path="playground/MVFC.Mediator.Playground.Api/MVFC.Mediator.Playground.Api.csproj" />
+    <Project Path="playground/MVFC.Mediator.Playground.AppHost/MVFC.Mediator.Playground.AppHost.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/MVFC.Mediator/MVFC.Mediator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MVFC.Mediator.Tests/MVFC.Mediator.Tests.csproj" />
+  </Folder>
+</Solution>

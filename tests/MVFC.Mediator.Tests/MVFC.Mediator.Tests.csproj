@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" />
+    <PackageReference Include="fluentAssertions" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+	<PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="Aspire.Hosting.Testing" />
+	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\..\playground\MVFC.Mediator.Playground.AppHost\MVFC.Mediator.Playground.AppHost.csproj" />
+	<ProjectReference Include="..\..\src\MVFC.Mediator\MVFC.Mediator.csproj" />
+  </ItemGroup>
+
+</Project>

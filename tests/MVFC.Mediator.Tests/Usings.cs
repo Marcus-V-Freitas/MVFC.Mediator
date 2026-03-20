@@ -1,0 +1,15 @@
+﻿global using FluentValidation;
+global using MVFC.Mediator.Tests.Models;
+global using FluentAssertions;
+global using Microsoft.Extensions.DependencyInjection;
+global using MVFC.Mediator.Extensions;
+global using MVFC.Mediator.Tests.Validator;
+global using Xunit;
+global using BenchmarkDotNet.Attributes;
+global using Aspire.Hosting;
+global using Aspire.Hosting.Testing;
+global using Microsoft.Extensions.Hosting;
+global using Refit;
+global using MVFC.Mediator.Tests.Services;
+global using MVFC.Mediator.Tests.Fixture;
+global using System.Net;
