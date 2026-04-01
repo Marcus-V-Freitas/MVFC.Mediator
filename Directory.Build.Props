@@ -1,9 +1,12 @@
 ﻿<Project>
-	<PropertyGroup>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(IsTestProject)' != 'true'">
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true'">
     <Authors>Marcus V. Freitas</Authors>
     <Company>MVFC</Company>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -15,5 +18,13 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' AND !$([System.String]::new('$(MSBuildProjectDirectory)').Contains('playground'))">
+    <PackageReference Include="MinVer" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([System.String]::new('$(MSBuildProjectDirectory)').Contains('playground'))">
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>
 </Project>
