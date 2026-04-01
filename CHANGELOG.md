@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-04-01
+
+### Changed
+- Standardized MSBuild file extensions and naming (`Directory.Build.props`, `Directory.Build.targets`).
+- Enabled `latest` language version and recommended analysis mode across all projects.
+- Disabled diagnostic S2326 (marker interfaces) in `.editorconfig`.
+- Replaced `DateTime` with `DateTimeOffset` in `CreateUserResponse` and `CreateUserCommandHandler`.
+- Refactored unit test handlers to encapsulate static call counts.
+- Minor naming adjustments (e.g., `cancellationToken` instead of `ct` in `ValidationExceptionHandler`).
+
 ## [3.0.0] - 2026-04-01
 
 ### Added
@@ -80,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `AddMediator()` extension method for `IServiceCollection`
 - BenchmarkDotNet benchmarks: 1.364 μs (single request), 13.688 μs (10 parallel requests)
 
+[3.1.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.2...HEAD
 [2.0.2]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.1...HEAD
 [2.0.1]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.0...v2.0.1

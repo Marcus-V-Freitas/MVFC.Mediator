@@ -5,7 +5,7 @@ internal sealed class ValidationExceptionHandler() : IExceptionHandler
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
-        CancellationToken ct)
+        CancellationToken cancellationToken)
     {
         if (exception is not ValidationException validationException)
         {
@@ -20,7 +20,7 @@ internal sealed class ValidationExceptionHandler() : IExceptionHandler
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
 
-        await httpContext.Response.WriteAsJsonAsync(problemDetails, ct).ConfigureAwait(false);
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
 
         return true;
     }

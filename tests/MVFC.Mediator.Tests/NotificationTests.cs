@@ -1,4 +1,4 @@
-namespace MVFC.Mediator.Tests;
+﻿namespace MVFC.Mediator.Tests;
 
 public sealed class NotificationTests
 {
@@ -21,46 +21,46 @@ public sealed class NotificationTests
     [Fact]
     public async Task Publish_ShouldInvokeSingleHandler()
     {
-        TestNotificationHandler.CallCount = 0;
+        TestNotificationHandler.ResetCount();
 
         using var scope = BuildProvider(handlerCount: 1).CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
         await mediator.Publish(new TestNotification("hello"), TestContext.Current.CancellationToken);
 
-        TestNotificationHandler.CallCount.Should().Be(1);
+        TestNotificationHandler.GetCount().Should().Be(1);
     }
 
     [Fact]
     public async Task Publish_ShouldInvokeAllHandlers_WhenThreeOrMoreRegistered()
     {
-        TestNotificationHandler.CallCount = 0;
-        TestNotificationHandlerB.CallCount = 0;
-        TestNotificationHandlerC.CallCount = 0;
+        TestNotificationHandler.ResetCount();
+        TestNotificationHandlerB.ResetCount();
+        TestNotificationHandlerC.ResetCount();
 
         using var scope = BuildProvider(handlerCount: 3).CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
         await mediator.Publish(new TestNotification("multi"), TestContext.Current.CancellationToken);
 
-        TestNotificationHandler.CallCount.Should().Be(1);
-        TestNotificationHandlerB.CallCount.Should().Be(1);
-        TestNotificationHandlerC.CallCount.Should().Be(1);
+        TestNotificationHandler.GetCount().Should().Be(1);
+        TestNotificationHandlerB.GetCount().Should().Be(1);
+        TestNotificationHandlerC.GetCount().Should().Be(1);
     }
 
     [Fact]
     public async Task Publish_ShouldInvokeAllHandlers_WhenMultipleRegistered()
     {
-        TestNotificationHandler.CallCount = 0;
-        TestNotificationHandlerB.CallCount = 0;
+        TestNotificationHandler.ResetCount();
+        TestNotificationHandlerB.ResetCount();
 
         using var scope = BuildProvider(handlerCount: 2).CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
         await mediator.Publish(new TestNotification("fan-out"), TestContext.Current.CancellationToken);
 
-        TestNotificationHandler.CallCount.Should().Be(1);
-        TestNotificationHandlerB.CallCount.Should().Be(1);
+        TestNotificationHandler.GetCount().Should().Be(1);
+        TestNotificationHandlerB.GetCount().Should().Be(1);
     }
 
     [Fact]

@@ -11,7 +11,7 @@ public sealed class CreateUserCommandHandler(ILogger<CreateUserCommandHandler> l
         _logger.LogCreatingUser(command.Name);
 
         var userId = Guid.NewGuid();
-        var createdAt = DateTime.UtcNow;
+        var createdAt = DateTimeOffset.UtcNow;
 
         await Task.Delay(TimeSpan.FromMilliseconds(1), cancellationToken).ConfigureAwait(false);
 

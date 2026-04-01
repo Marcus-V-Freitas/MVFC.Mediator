@@ -450,6 +450,9 @@ dotnet_diagnostic.S1186.severity = warning
 # Não lançar exceções genéricas (Exception, ApplicationException)
 dotnet_diagnostic.S112.severity  = warning
 
+# Marker interfaces: não exigir uso do parâmetro genérico
+dotnet_diagnostic.S2326.severity = none
+
 # ──────────────────────────────────────────────────────────
 # 14. ROSLYNATOR — principais
 # ──────────────────────────────────────────────────────────

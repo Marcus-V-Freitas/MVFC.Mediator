@@ -1,4 +1,4 @@
-namespace MVFC.Mediator.Tests;
+﻿namespace MVFC.Mediator.Tests;
 
 public sealed class CommandTests
 {
@@ -26,13 +26,13 @@ public sealed class CommandTests
     [Fact]
     public async Task Send_VoidCommand_ShouldInvokeHandler()
     {
-        TestVoidCommandHandler.CallCount = 0;
+        TestVoidCommandHandler.ResetCount();
         using var scope = BuildProvider().CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
         await mediator.Send(new TestVoidCommand("void"), TestContext.Current.CancellationToken);
 
-        TestVoidCommandHandler.CallCount.Should().Be(1);
+        TestVoidCommandHandler.GetCount().Should().Be(1);
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public sealed class CommandTests
     [Fact]
     public async Task Send_ShouldUseCachedInvoker_OnSubsequentCalls()
     {
-        TestVoidCommandHandler.CallCount = 0;
+        TestVoidCommandHandler.ResetCount();
         var provider = BuildProvider();
         var cmd = new TestVoidCommand("cached");
 
@@ -96,7 +96,7 @@ public sealed class CommandTests
             await mediator.Send(cmd, TestContext.Current.CancellationToken);
         }
 
-        TestVoidCommandHandler.CallCount.Should().Be(3);
+        TestVoidCommandHandler.GetCount().Should().Be(3);
     }
 
     [Fact]
@@ -128,13 +128,13 @@ public sealed class CommandTests
     [Fact]
     public async Task Send_VoidCommand_ShouldPass_WhenMultipleValidatorsSucceed()
     {
-        TestVoidCommandHandler.CallCount = 0;
-        using var scope = BuildProvider(withValidator: true, multipleValidators: true).CreateScope(); // VoidCommand handles ICommand, but I haven't added validators for it in BuildProvider
+        TestVoidCommandHandler.ResetCount();
+        using var scope = BuildProvider(withValidator: true, multipleValidators: true).CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
         await mediator.Send(new TestVoidCommand("valid-void"), TestContext.Current.CancellationToken);
 
-        TestVoidCommandHandler.CallCount.Should().Be(1);
+        TestVoidCommandHandler.GetCount().Should().Be(1);
     }
 
     [Fact]
