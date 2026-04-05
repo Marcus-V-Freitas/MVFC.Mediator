@@ -1,9 +1,17 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [3.2.0] - 2026-04-05
+
+### Added
+- Rollback mechanism implementation in the CI pipeline.
+
+### Changed
+- Modernized project icon for a refreshed aesthetic.
 
 ## [3.1.0] - 2026-04-01
 
@@ -90,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `AddMediator()` extension method for `IServiceCollection`
 - BenchmarkDotNet benchmarks: 1.364 μs (single request), 13.688 μs (10 parallel requests)
 
+[3.2.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.2...HEAD
 [2.0.2]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.1...HEAD
