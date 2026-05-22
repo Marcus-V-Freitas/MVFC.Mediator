@@ -1,4 +1,4 @@
-namespace MVFC.Mediator.Tests;
+﻿namespace MVFC.Mediator.Tests;
 
 public sealed class ExtensionTests
 {

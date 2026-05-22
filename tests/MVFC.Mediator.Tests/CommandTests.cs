@@ -159,4 +159,110 @@ public sealed class CommandTests
         var ex = await act.Should().ThrowAsync<ValidationException>();
         ex.Which.Errors.Should().Contain(e => e.ErrorMessage.Contains("forbidden"));
     }
+
+    [Fact]
+    public void AddMediator_WithFilter_ShouldUseCallingAssembly_WhenNoAssemblyProvided()
+    {
+        var services = new ServiceCollection();
+        services.AddMediator(t => t.Name.Contains("Void", StringComparison.Ordinal));
+
+        var provider = services.BuildServiceProvider();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+
+        voidHandler.Should().NotBeNull();
+        respHandler.Should().BeNull();
+    }
+
+    [Fact]
+    public void AddMediator_WithoutFilter_ShouldUseCallingAssembly_WhenNoAssemblyProvided()
+    {
+        var services = new ServiceCollection();
+        services.AddMediator();
+
+        var provider = services.BuildServiceProvider();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+
+        voidHandler.Should().NotBeNull();
+        respHandler.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void AddMediator_WithFilter_ShouldOnlyRegisterMatchingHandlers()
+    {
+        var services = new ServiceCollection();
+        var assembly = typeof(TestVoidCommandHandler).Assembly;
+        services.AddMediator(t => t.Name.Contains("Void", StringComparison.Ordinal), assembly);
+
+        var provider = services.BuildServiceProvider();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+
+        voidHandler.Should().NotBeNull();
+        respHandler.Should().BeNull();
+    }
+
+    [Fact]
+    public void AddMediator_WithFilter_ShouldRegisterNothing_WhenFilterFailsAll()
+    {
+        var services = new ServiceCollection();
+        var assembly = typeof(TestVoidCommandHandler).Assembly;
+        services.AddMediator(t => t.Name == "NonExistentHandler", assembly);
+
+        var provider = services.BuildServiceProvider();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+
+        voidHandler.Should().BeNull();
+        respHandler.Should().BeNull();
+    }
+
+    [Fact]
+    public void AddMediatorSpecificHandlers_ShouldOnlyRegisterProvidedTypes()
+    {
+        var services = new ServiceCollection();
+        services.AddMediatorSpecificHandlers(typeof(TestCommandHandler));
+        var provider = services.BuildServiceProvider();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+        respHandler.Should().NotBeNull();
+        voidHandler.Should().BeNull();
+    }
+
+    [Fact]
+    public void AddMediatorSpecificHandlers_ShouldRegisterMultipleTypesSuccessfully()
+    {
+        var services = new ServiceCollection();
+        services.AddMediatorSpecificHandlers(
+            typeof(TestCommandHandler),
+            typeof(TestVoidCommandHandler));
+
+        var provider = services.BuildServiceProvider();
+        var respHandler = provider.GetService<ICommandHandler<TestCommand, TestResponse>>();
+        var voidHandler = provider.GetService<ICommandHandler<TestVoidCommand>>();
+
+        respHandler.Should().NotBeNull();
+        voidHandler.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void AddMediator_WithFilter_ShouldThrowArgumentNullException_WhenAssembliesAreNull()
+    {
+        var services = new ServiceCollection();
+
+        var act = () => services.AddMediator(t => true, null!);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void AddMediatorSpecificHandlers_ShouldThrowArgumentNullException_WhenTypesAreNull()
+    {
+        var services = new ServiceCollection();
+
+        var act = () => services.AddMediatorSpecificHandlers(null!);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
 }
