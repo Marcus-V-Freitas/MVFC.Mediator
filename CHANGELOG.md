@@ -5,17 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-06-24
+
+### Changed
+
+- Updated NuGet dependencies to their newer versions.
+
 ## [3.2.0] - 2026-04-05
 
 ### Added
+
 - Rollback mechanism implementation in the CI pipeline.
 
 ### Changed
+
 - Modernized project icon for a refreshed aesthetic.
 
 ## [3.1.0] - 2026-04-01
 
 ### Changed
+
 - Standardized MSBuild file extensions and naming (`Directory.Build.props`, `Directory.Build.targets`).
 - Enabled `latest` language version and recommended analysis mode across all projects.
 - Disabled diagnostic S2326 (marker interfaces) in `.editorconfig`.
@@ -26,10 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0] - 2026-04-01
 
 ### Added
+
 - Integrated **MinVer** for automatic Semantic Versioning based on Git tags.
 - Configured `MinVerTagPrefix` as `v` to align with existing project tagging conventions.
 
 ### Changed
+
 - Simplified GitHub Actions CI workflow by removing manual version extraction and project patching scripts.
 - Optimized MSBuild property functions in `Directory.Build.Props` for more robust project categorization and exclusion (e.g., playground projects).
 - Improved code coverage reporting by explicitly excluding `tests` and `playground` projects in `codecov.yml` and `coverage.runsettings`.
@@ -37,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.2] - 2026-03-21
 
 ### Changed
+
 - CI/CD workflow refinements for automated publishing and coverage reporting
 - Minor adjustments to Codecov configuration for status checks precision
 
@@ -45,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.1] - 2026-03-19
 
 ### Added
+
 - Comprehensive multi-language documentation (English and Portuguese) with detailed usage examples
 
 ---
@@ -52,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2026-03-19
 
 ### Added
+
 - `IQuery<TResponse>` and `IQueryHandler<TQuery, TResponse>` — query support with the same
   zero-allocation dispatcher pattern used by commands
 - `INotification` and `INotificationHandler<TNotification>` — fan-out publish support for
@@ -71,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2025-11-16
 
 ### Added
+
 - Multi-target support for `net9.0` and `net10.0`
 
 ---
@@ -78,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2025-10-27
 
 ### Removed
+
 - Test project excluded from NuGet package artifacts
 
 ---
@@ -85,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-10-27
 
 ### Added
+
 - Initial release
 - `ICommand` and `ICommand<TResponse>` — base interfaces for void and typed commands
 - `ICommandHandler<TCommand>` and `ICommandHandler<TCommand, TResponse>` — handler contracts
