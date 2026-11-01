@@ -28,13 +28,13 @@ internal static class VoidCommandDispatcher<TCommand> where TCommand : ICommand
 
             if (!enumerator.MoveNext())
             {
-                var result = await firstValidator.ValidateAsync(cmd!, ct).ConfigureAwait(false);
+                var result = await firstValidator.ValidateAsync(cmd, ct).ConfigureAwait(false);
                 if (!result.IsValid)
                     throw new ValidationException(result.Errors);
             }
             else
             {
-                await ValidateMultiple(firstValidator, enumerator, cmd!, ct).ConfigureAwait(false);
+                await ValidateMultiple(firstValidator, enumerator, cmd, ct).ConfigureAwait(false);
             }
         }
 
@@ -122,7 +122,7 @@ internal static class VoidCommandDispatcher<TCommand> where TCommand : ICommand
             return handler.Handle(command, cancellationToken);
         }
 
-        Interlocked.CompareExchange(ref _invoker, NewInvoker, null);
+        Interlocked.CompareExchange(ref _invoker, NewInvoker, comparand: null);
         return handler.Handle(cmd, ct);
     }
 }

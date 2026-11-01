@@ -17,13 +17,13 @@ internal static class QueryDispatcher<TQuery, TResponse> where TQuery : IQuery<T
 
             if (!enumerator.MoveNext())
             {
-                var result = await firstValidator.ValidateAsync(query!, ct).ConfigureAwait(false);
+                var result = await firstValidator.ValidateAsync(query, ct).ConfigureAwait(false);
                 if (!result.IsValid)
                     throw new ValidationException(result.Errors);
             }
             else
             {
-                await ValidateMultiple(firstValidator, enumerator, query!, ct).ConfigureAwait(false);
+                await ValidateMultiple(firstValidator, enumerator, query, ct).ConfigureAwait(false);
             }
         }
 
@@ -83,7 +83,7 @@ internal static class QueryDispatcher<TQuery, TResponse> where TQuery : IQuery<T
             return handler.Handle(q, cancellationToken);
         }
 
-        Interlocked.CompareExchange(ref _invoker, NewInvoker, null);
+        Interlocked.CompareExchange(ref _invoker, NewInvoker, comparand: null);
         return handler.Handle(query, ct);
     }
 }

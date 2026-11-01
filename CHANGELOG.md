@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2026-11-01
+
+### Added
+
+- Added `global.json` pinning the .NET 10 SDK version and configuring `Microsoft.Testing.Platform`.
+- Added `dotnet-reportgenerator-globaltool` and `dotnet-coverage` to `.config/dotnet-tools.json` local tools manifest.
+- Added `<IsTestProject>true</IsTestProject>` and configured analyzer/runtime asset metadata in `MVFC.Mediator.Tests.csproj`.
+- Added OIDC authentication via `NuGet/login@v1` for publishing packages to NuGet.org.
+- Added strict tag ancestry validation (`origin/main`) and concurrency controls in CI/CD workflow.
+
+### Changed
+
+- Renamed `Mediator` class to `MediatorService` and updated DI registration in `MediatorExtensions`.
+- Updated `build.cake` to run tools via `dotnet tool run` instead of local tool installations.
+- Replaced `SonarAnalyzer.CSharp` with `MVFC.Pack.Analyzers` in `Directory.Build.targets`.
+- Enabled central package transitive pinning (`CentralPackageTransitivePinningEnabled`).
+- Updated NuGet package dependencies (`FluentValidation` 12.2.0, `MinVer` 8.0.0, `Aspire` 13.6.4, `xunit.v3` 4.0.2, `Microsoft.NET.Test.Sdk` 18.11.0, `Microsoft.Extensions.DependencyInjection` 10.0.14).
+- Renamed `DefaultEndpoints.cs` to `EndpointsExtensions.cs` in playground API.
+- Code cleanup in command/query dispatchers removing redundant null-forgiving operators and clarifying exchange comparand.
+
+### Removed
+
+- Removed obsolete `cleanup-tag-on-failure` job in GitHub Actions CI workflow.
+
 ## [3.3.0] - 2026-06-24
 
 ### Changed
@@ -115,6 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `AddMediator()` extension method for `IServiceCollection`
 - BenchmarkDotNet benchmarks: 1.364 μs (single request), 13.688 μs (10 parallel requests)
 
+[3.4.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.3.0...v3.4.0
+[3.3.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v2.0.2...HEAD

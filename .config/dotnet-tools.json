@@ -8,6 +8,18 @@
         "dotnet-cake"
       ],
       "rollForward": false
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.3.11",
+      "commands": [
+        "reportgenerator"
+      ]
+    },
+    "dotnet-coverage": {
+      "version": "18.12.0",
+      "commands": [
+        "dotnet-coverage"
+      ]
     }
   }
 }

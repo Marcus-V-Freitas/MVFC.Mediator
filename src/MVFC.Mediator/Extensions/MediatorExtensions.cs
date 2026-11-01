@@ -57,7 +57,7 @@ public static class MediatorExtensions
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(handlerTypes);
 
-        services.AddScoped<IMediator, Mediator>();
+        services.AddScoped<IMediator, MediatorService>();
         RegisterHandlers(services, handlerTypes, filter: null);
 
         return services;
@@ -68,7 +68,7 @@ public static class MediatorExtensions
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(assembliesToScan);
 
-        services.AddScoped<IMediator, Mediator>();
+        services.AddScoped<IMediator, MediatorService>();
 
         foreach (var assembly in assembliesToScan)
         {

@@ -3,7 +3,7 @@
 /// <summary>
 /// Implementação principal do padrão Mediator, responsável por enviar comandos e coordenar sua execução.
 /// </summary>
-public sealed class Mediator(IServiceProvider serviceProvider) : IMediator
+public sealed class MediatorService(IServiceProvider serviceProvider) : IMediator
 {
     private readonly IServiceProvider _serviceProvider = serviceProvider;
 

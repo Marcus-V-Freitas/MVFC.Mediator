@@ -10,7 +10,7 @@ public sealed class ExtensionTests
 
         var sp = services.BuildServiceProvider();
         sp.GetService<IMediator>().Should().NotBeNull();
-        sp.GetService<IMediator>().Should().BeOfType<Mediator>();
+        sp.GetService<IMediator>().Should().BeOfType<MediatorService>();
     }
 
     [Fact]
