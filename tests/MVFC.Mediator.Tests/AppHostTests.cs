@@ -52,8 +52,8 @@ public sealed class AppHostTests(AppHostFixture fixture) : IClassFixture<AppHost
         var response = await _fixture.PlaygroundApi.PostUser(command);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
-        response.Error.Should().NotBeNull();
-        response.Error!.Content.Should().Contain(expectedError);
+        ((int)response.StatusCode!).Should().Be((int)HttpStatusCode.UnprocessableEntity);
+        response.Error!.Should().NotBeNull();
+        (response.Error as ApiException)!.Content.Should().Contain(expectedError);
     }
 }

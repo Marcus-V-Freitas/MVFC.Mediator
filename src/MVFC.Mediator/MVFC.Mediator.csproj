@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	  <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+	  <TargetFrameworks>net9.0;net10.0;net11.0</TargetFrameworks>
 	  <Authors>Marcus Vinicius de Freitas Costa</Authors>
 	  <Description>Uma biblioteca leve para implementação do padrão Mediator em .NET, facilitando a comunicação entre componentes e promovendo desacoplamento.</Description>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>

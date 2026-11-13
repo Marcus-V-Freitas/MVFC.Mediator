@@ -15,7 +15,7 @@ public sealed class AppHostFixture : IAsyncLifetime
 
         _appHttpClient = _appHost.CreateHttpClient("api");
 
-        PlaygroundApi = RestService.For<IPlaygroundApiClient>(_appHttpClient);
+        PlaygroundApi = RestService.ForGenerated<IPlaygroundApiClient>(_appHttpClient);
     }
 
     public async ValueTask DisposeAsync()

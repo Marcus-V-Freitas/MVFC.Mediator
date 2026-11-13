@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-11-12
+
+### Added
+
+- Added `net11.0` target framework to `MVFC.Mediator` (`net9.0;net10.0;net11.0`).
+- Added .NET 11.0 SDK setup (`11.0.x`) in GitHub Actions CI workflow.
+- Added conditional package resolution for `Microsoft.Extensions.DependencyInjection` (11.0.0) under `net11.0`.
+
+### Changed
+
+- **BREAKING**: Upgraded `Refit` to `16.4.0`, requiring migration to `RestService.ForGenerated<T>` and updating error message handling.
+- **BREAKING**: Upgraded Playground (`Api`, `AppHost`) and Test projects target framework from `net10.0` to `net11.0`.
+- Updated `global.json` to allow prerelease SDKs and configure `rollForward` to `latestMajor`.
+- Centralized and updated NuGet package dependencies:
+  - `Aspire.Hosting.*` to `13.6.5`
+  - `Microsoft.NET.Test.Sdk` to `18.12.0`
+  - `xunit.v3` to `4.0.3`
+
 ## [3.4.0] - 2026-11-01
 
 ### Added
@@ -139,6 +157,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `AddMediator()` extension method for `IServiceCollection`
 - BenchmarkDotNet benchmarks: 1.364 μs (single request), 13.688 μs (10 parallel requests)
 
+[4.0.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.4.0...v4.0.0
 [3.4.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/Marcus-V-Freitas/MVFC.Mediator/compare/v3.1.0...v3.2.0
